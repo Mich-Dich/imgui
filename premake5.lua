@@ -3,8 +3,8 @@ project "ImGui"
 	language "C++"
     staticruntime "off"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputs .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputs .. "/%{prj.name}")
 
 	files
 	{
@@ -18,12 +18,30 @@ project "ImGui"
 		"imstb_rectpack.h",
 		"imstb_textedit.h",
 		"imstb_truetype.h",
-		"imgui_demo.cpp"
+		"imgui_demo.cpp",
+		"imgui_impl_glfw.h",
+		"imgui_impl_glfw.cpp",
+		"imgui_impl_vulkan.h",
+		"imgui_impl_vulkan.cpp",
+	}
+
+	includedirs
+	{
+		"PFF/vendor/ImGui",
+		"%{prj.name}",
+		"../../vendor/glfw/include",
+		vulkan_dir .. "/Include",
 	}
 
 	filter "system:windows"
 		systemversion "latest"
 		cppdialect "C++17"
+
+		postbuildcommands
+		{
+			"{COPY} %{cfg.buildtarget.relpath} ../../libs",
+		}
+
 
 	filter "system:linux"
 		pic "On"
