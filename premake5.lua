@@ -52,16 +52,13 @@ project "ImGui"
 		runtime "Debug"
 		symbols "on"
 
+	filter "configurations:RelWithDebInfo"
+		-- buildoptions "/MD"
+		-- defines "PFF_RELEASE_WITH_DEBUG_INFO"
+		runtime "Release"
+		symbols "on"
+		optimize "speed"
+
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "on"
-
-    filter "configurations:Dist"
-		runtime "Release"
-		optimize "on"
-        symbols "off"
-
-		filter "configurations:Dist"
-		runtime "Release"
-		optimize "speed"
-        symbols "off"
