@@ -27,21 +27,16 @@ project "ImGui"
 
 	includedirs
 	{
-		"PFF/vendor/ImGui",
+		-- "PFF/vendor/ImGui",
 		"%{prj.name}",
-		"../../vendor/glfw/include",
-		vulkan_dir .. "/Include",
+		
+		"%{IncludeDir.glfw}/include",
+		"%{IncludeDir.VulkanSDK}",
 	}
 
 	filter "system:windows"
 		systemversion "latest"
 		cppdialect "C++17"
-
-		postbuildcommands
-		{
-			"{COPY} %{cfg.buildtarget.relpath} ../../libs",
-		}
-
 
 	filter "system:linux"
 		pic "On"
