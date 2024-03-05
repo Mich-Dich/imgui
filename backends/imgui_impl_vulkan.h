@@ -102,6 +102,13 @@ IMGUI_IMPL_API bool         ImGui_ImplVulkan_LoadFunctions(PFN_vkVoidFunction(*l
 struct ImGui_ImplVulkanH_Frame;
 struct ImGui_ImplVulkanH_Window;
 
+// =================================== custom code 
+// Define global function pointer 
+typedef void (*FunctionPtr)(VkDevice device, const VkAllocationCallbacks* allocator, VkRenderPass render_pass);
+
+void ImGui_set_create_render_pass_func(FunctionPtr func);
+// =================================== custom code ===================================
+
 // Helpers
 IMGUI_IMPL_API void                 ImGui_ImplVulkanH_CreateOrResizeWindow(VkInstance instance, VkPhysicalDevice physical_device, VkDevice device, ImGui_ImplVulkanH_Window* wnd, uint32_t queue_family, const VkAllocationCallbacks* allocator, int w, int h, uint32_t min_image_count);
 IMGUI_IMPL_API void                 ImGui_ImplVulkanH_DestroyWindow(VkInstance instance, VkDevice device, ImGui_ImplVulkanH_Window* wnd, const VkAllocationCallbacks* allocator);
