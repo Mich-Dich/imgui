@@ -1,4 +1,4 @@
-project "ImGui"
+project "imgui"
 	kind "StaticLib"
 	language "C++"
     staticruntime "off"
@@ -19,17 +19,16 @@ project "ImGui"
 		"imstb_textedit.h",
 		"imstb_truetype.h",
 		"imgui_demo.cpp",
-		"backends/imgui_impl_glfw.h",
-		"backends/imgui_impl_glfw.cpp",
-		"backends/imgui_impl_vulkan.h",
-		"backends/imgui_impl_vulkan.cpp",
+		"imgui_impl_glfw.h",
+		"imgui_impl_glfw.cpp",
+		"imgui_impl_vulkan.h",
+		"imgui_impl_vulkan.cpp",
 	}
 
 	includedirs
 	{
-		-- "PFF/vendor/ImGui",
 		"%{prj.name}",
-		
+		"backends",
 		"%{IncludeDir.glfw}/include",
 		"%{IncludeDir.VulkanSDK}",
 	}
