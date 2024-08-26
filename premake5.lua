@@ -33,6 +33,13 @@ project "imgui"
 		"%{IncludeDir.VulkanSDK}",
 	}
 
+	postbuildcommands {
+	
+		-- copy premake exe
+		"{MKDIR} %{wks.location}/bin/" .. outputs .. "/vendor",
+		'{COPYDIR} "%{cfg.buildtarget.directory}" "../../../bin/' .. outputs .. '/vendor/%{prj.name}"'
+	}
+
 	filter "system:windows"
 		systemversion "latest"
 		cppdialect "C++17"
@@ -43,12 +50,12 @@ project "imgui"
 		cppdialect "C++17"
 
 	filter "configurations:Debug"
+		buildoptions "/MDd"
 		runtime "Debug"
 		symbols "on"
-
+		
 	filter "configurations:RelWithDebInfo"
-		-- buildoptions "/MD"
-		-- defines "PFF_RELEASE_WITH_DEBUG_INFO"
+		buildoptions "/MD"
 		runtime "Release"
 		symbols "on"
 		optimize "speed"
@@ -57,3 +64,4 @@ project "imgui"
 		buildoptions "/MD"
 		runtime "Release"
 		optimize "on"
+		
