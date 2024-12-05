@@ -58,10 +58,11 @@ project "imgui"
 		buildoptions "/MD"
 		runtime "Release"
 		symbols "on"
-		optimize "speed"
+		optimize "On"
 
 	filter "configurations:Release"
 		buildoptions "/MD"
 		runtime "Release"
-		optimize "on"
+		symbols "off"
+		optimize "Full"
 		
