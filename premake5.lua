@@ -36,7 +36,7 @@ project "imgui"
 	postbuildcommands {
 	
 		-- copy premake exe
-		"{MKDIR} %{wks.location}/bin/" .. outputs .. "/vendor",
+		"{MKDIR} %{wks.location}/bin/" .. outputs .. "/vendor/%{prj.name}",
 		'{COPYDIR} "%{cfg.buildtarget.directory}" "../../../bin/' .. outputs .. '/vendor/%{prj.name}"'
 	}
 
