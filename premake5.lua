@@ -1,7 +1,8 @@
 project "imgui"
 	kind "StaticLib"
 	language "C++"
-    staticruntime "off"
+	cppdialect "C++17"
+    staticruntime "on"
 
 	targetdir ("bin/" .. outputs .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputs .. "/%{prj.name}")
@@ -33,27 +34,29 @@ project "imgui"
 		"%{IncludeDir.VulkanSDK}",
 	}
 
+	postbuildcommands {
+	
+		-- copy premake exe
+		"{MKDIR} %{wks.location}/bin/" .. outputs .. "/vendor/%{prj.name}",
+		'{COPYDIR} "%{cfg.buildtarget.directory}" "../../../bin/' .. outputs .. '/vendor/%{prj.name}"'
+	}
+
 	filter "system:windows"
 		systemversion "latest"
-		cppdialect "C++17"
 
 	filter "system:linux"
 		pic "On"
 		systemversion "latest"
-		cppdialect "C++17"
 
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
-
+		
 	filter "configurations:RelWithDebInfo"
-		-- buildoptions "/MD"
-		-- defines "PFF_RELEASE_WITH_DEBUG_INFO"
 		runtime "Release"
 		symbols "on"
-		optimize "speed"
+		optimize "on"
 
 	filter "configurations:Release"
-		buildoptions "/MD"
 		runtime "Release"
 		optimize "on"
