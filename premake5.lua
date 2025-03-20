@@ -31,14 +31,22 @@ project "imgui"
 		"%{prj.name}",
 		"backends",
 		"%{IncludeDir.glfw}/include",
-		"%{IncludeDir.VulkanSDK}",
+		"%{IncludeDir.Vulkan}",
 	}
 
 	postbuildcommands {
 	
 		-- copy premake exe
 		"{MKDIR} %{wks.location}/bin/" .. outputs .. "/vendor/%{prj.name}",
-		'{COPYDIR} "%{cfg.buildtarget.directory}" "../../../bin/' .. outputs .. '/vendor/%{prj.name}"'
+		'{COPYDIR} "%{cfg.buildtarget.directory}" "../../../bin/' .. outputs .. '/vendor/%{prj.name}"',
+
+		-- Copy ImGui source files
+		'{COPY} "*.h" "../../../bin/' .. outputs .. '/vendor/%{prj.name}"',
+		'{COPY} "*.cpp" "../../../bin/' .. outputs .. '/vendor/%{prj.name}"',
+		'{COPY} "LICENSE.txt" "../../../bin/' .. outputs .. '/vendor/%{prj.name}"',
+		
+		'{COPYDIR} "backends" "../../../bin/' .. outputs .. '/vendor/%{prj.name}/backends"',
+		'{COPYDIR} "misc" "../../../bin/' .. outputs .. '/vendor/%{prj.name}/misc"',
 	}
 
 	filter "system:windows"
