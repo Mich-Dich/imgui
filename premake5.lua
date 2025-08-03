@@ -20,20 +20,17 @@ project "imgui"
 		"imstb_textedit.h",
 		"imstb_truetype.h",
 		"imgui_demo.cpp",
-		"imgui_impl_glfw.h",
-		"imgui_impl_glfw.cpp",
-		"imgui_impl_vulkan.h",
-		"imgui_impl_vulkan.cpp",
-		"imgui_impl_opengl3.h",
-		"imgui_impl_opengl3.cpp",
+		"backends/imgui_impl_glfw.h",
+		"backends/imgui_impl_glfw.cpp",
 	}
 
 	includedirs
 	{
 		"%{prj.name}",
+		".",
 		"backends",
 		"%{IncludeDir.glfw}/include",
-		"%{IncludeDir.Vulkan}",
+		-- "%{IncludeDir.Vulkan}",
 	}
 
 	filter "system:windows"

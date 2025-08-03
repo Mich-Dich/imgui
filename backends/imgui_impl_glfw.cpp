@@ -74,6 +74,8 @@
 //  2017-08-25: Inputs: MousePos set to -FLT_MAX,-FLT_MAX when mouse is unavailable/missing (instead of -1,-1).
 //  2016-10-15: Misc: Added a void* user_data parameter to Clipboard function handlers.
 
+#include <string>
+
 #include "imgui.h"
 #ifndef IMGUI_DISABLE
 #include "imgui_impl_glfw.h"
@@ -1038,13 +1040,13 @@ static void ImGui_ImplGlfw_CreateWindow(ImGuiViewport* viewport)
     glfwWindowHint(GLFW_FOCUSED, false);
 #if GLFW_HAS_FOCUS_ON_SHOW
     glfwWindowHint(GLFW_FOCUS_ON_SHOW, false);
- #endif
+#endif
     glfwWindowHint(GLFW_DECORATED, (viewport->Flags & ImGuiViewportFlags_NoDecoration) ? false : true);
 #if GLFW_HAS_WINDOW_TOPMOST
     glfwWindowHint(GLFW_FLOATING, (viewport->Flags & ImGuiViewportFlags_TopMost) ? true : false);
 #endif
     GLFWwindow* share_window = (bd->ClientApi == GlfwClientApi_OpenGL) ? bd->Window : nullptr;
-    vd->Window = glfwCreateWindow((int)viewport->Size.x, (int)viewport->Size.y, "No Title Yet", nullptr, share_window);
+    vd->Window = glfwCreateWindow((int)viewport->Size.x, (int)viewport->Size.y, "imgui_sub_window", nullptr, share_window);
     vd->WindowOwned = true;
     viewport->PlatformHandle = (void*)vd->Window;
 #ifdef _WIN32
@@ -1179,7 +1181,9 @@ static void ImGui_ImplGlfw_SetWindowSize(ImGuiViewport* viewport, ImVec2 size)
 static void ImGui_ImplGlfw_SetWindowTitle(ImGuiViewport* viewport, const char* title)
 {
     ImGui_ImplGlfw_ViewportData* vd = (ImGui_ImplGlfw_ViewportData*)viewport->PlatformUserData;
-    glfwSetWindowTitle(vd->Window, title);
+    std::string newTitle = "ISW - ";                                                                    // Prepend "ISW - " to the title (Imgui-Sub-Window)
+    newTitle += title;
+    glfwSetWindowTitle(vd->Window, newTitle.c_str());
 }
 
 static void ImGui_ImplGlfw_SetWindowFocus(ImGuiViewport* viewport)
