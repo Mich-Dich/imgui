@@ -22,8 +22,8 @@ project "imgui"
 		"imgui_demo.cpp",
 		"imgui_impl_glfw.h",
 		"imgui_impl_glfw.cpp",
-		"imgui_impl_vulkan.h",
-		"imgui_impl_vulkan.cpp",
+		-- "imgui_impl_vulkan.h",
+		-- "imgui_impl_vulkan.cpp",
 		"imgui_impl_opengl3.h",
 		"imgui_impl_opengl3.cpp",
 	}
@@ -33,7 +33,7 @@ project "imgui"
 		"%{prj.name}",
 		"backends",
 		"%{IncludeDir.glfw}/include",
-		"%{IncludeDir.Vulkan}",
+		-- "%{IncludeDir.Vulkan}",
 	}
 
 	filter "system:windows"
